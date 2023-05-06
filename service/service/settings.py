@@ -136,7 +136,7 @@ REST_FRAMEWORK={
     # 튜플이라는 것을 알려주기 위해 , 를 생략하면 안됨.
     # 생략하면 우선순위 연산자로 인식해버림.
     'DEFAULT_PERMISSION_CLASSES' : (
-        'rest_framework.permission.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES' : (
         'rest_framework.authentication.BasicAuthentication',

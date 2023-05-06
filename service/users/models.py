@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.base_user import BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
@@ -20,6 +19,9 @@ class UserManager(BaseUserManager):
 # 사용자 정보를 다루는 모델
 class User(AbstractUser):
     TIMEOUT=60*5
+
+    USERNAME_FIELD='email' #이메일이 pk
+    REQUIRED_FIELDS=['username'] #가입할 때 필수
     
     email=models.EmailField(max_length=256, unique=True)
     username=models.CharField(max_length=128, unique=True)
@@ -28,8 +30,8 @@ class User(AbstractUser):
     description=models.CharField(max_length=512, blank=True)
     authcode=models.CharField(max_length=17)
     
-    created=models.DataTimeField(auto_now_add=True)
-    updated=models.DataTimeField(auto_now=True)
+    created=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now=True)
     
     object=UserManager()
     user_manager=UserManager()
